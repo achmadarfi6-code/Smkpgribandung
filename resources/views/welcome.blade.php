@@ -53,7 +53,7 @@
             <ul>
               <li><a href="#informasi_pendaftaran">Informasi Pendaftaran</a></li>
               @if ($informasi_pendaftaran->status==1)
-              <li><a href="/register" target="_blank">Daftar Sekarang</a></li>
+              <li><a href="{{ route('ppdb') }}" target="_blank">Daftar Sekarang</a></li>
               @endif
             </ul>
           </li>
@@ -61,7 +61,6 @@
           <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->
-
 
     </div>
   </header><!-- End Header -->
@@ -77,17 +76,13 @@
           @if ($informasi_pendaftaran->status==1)
           <h2>Di Website {{$profile_madrasah->nama}}, untuk pendaftaran peserta didik baru silahkan klik tombol daftar dibawah.</h2>
           <div class="d-flex">
-            <a href="/register" class="btn-get-started scrollto" target="_blank">Daftar Sekarang</a>
+            <a href="{{ route('ppdb') }}" class="btn-get-started scrollto" target="_blank">Daftar Sekarang</a>
             <a href="#informasi_pendaftaran" class="btn-watch-video scrollto">Informasi Pendaftaran <i class="icofont-info-circle"></i></a>
           </div>
           @else
           <h2>Di Website {{$profile_madrasah->nama}}, pendaftaran peserta didik baru <span class="badge badge-danger">Telah Ditutup</span> sampai jumpa pada PPDB tahun depan.</h2>
           @endif
 
-          <!-- <h2>Di Website {{$profile_madrasah->nama}}</h2>
-          <div class="d-flex">
-            <a href="/register" class="btn-get-started scrollto" target="_blank">Daftar Sekarang</a>
-          </div> -->
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
           <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
@@ -187,7 +182,7 @@
         <div class="section-title">
           <span>Ektrakulikuler</span>
           <h2>Ektrakulikuler</h2>
-          <p>Untuk mengembangkan minat dan bakat siswa di {{$profile_madrasah->nama}} terdapat beberapa kegiatan ekstrakulikuler, diantaraya :</p>
+          <p>Untuk mengembangkan minat dan bakat siswa di {{$profile_madrasah->nama}} terdapat beberapa kegiatan ekstrakulikuler, diantaranya :</p>
         </div>
 
         <div class="row">
@@ -206,6 +201,7 @@
 
       </div>
     </section><!-- End Services Section -->
+
     <!-- ======= Team Section ======= -->
     <section id="gtk" class="team section-bg">
       <div class="container">
@@ -247,11 +243,11 @@
             <img src="{{URL::to('/')}}/gambar_pendaftaran/{{$informasi_pendaftaran->gambar}}" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content">
-            <h3>Informasi Pendafaran</h3>
+            <h3>Informasi Pendaftaran</h3>
             {!!$informasi_pendaftaran->deskripsi!!}
 
             @if ($informasi_pendaftaran->status==1)
-            <a href="/register" class="btn btn-success" target="_blank" disabled>Daftar Sekarang</a>
+            <a href="{{ route('ppdb') }}" class="btn btn-success" target="_blank">Daftar Sekarang</a>
             @else
             <a class="btn btn-danger disabled" aria-disabled="true">Pendaftaran Telah Ditutup</a>
             @endif
@@ -331,10 +327,6 @@
         MTs. Manba'ul Huda | <strong><span>2020</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/enno-free-simple-bootstrap-template/ -->
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>

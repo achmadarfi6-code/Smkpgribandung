@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>{{$madrasah->nama}} | Admin</title>
+    <title>{{ $madrasah->nama ?? 'Nama Madrasah' }} | Admin</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -36,14 +36,15 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
 
-            <a class="navbar-brand mr-auto" href="#">
-                <img src="{{URL::to('/')}}/logo_madrasah/{{$madrasah->logo}}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-                {{$madrasah->nama}}
+            <a class="navbar-brand mr-auto" href="{{ route('home') }}">
+                <img src="{{ URL::to('/') }}/logo_madrasah/{{ $madrasah->logo ?? 'default-logo.png' }}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                {{ $madrasah->nama ?? 'Nama Madrasah' }}
             </a>
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li><a href="{{ route('home') }}">Dashboard</a></li>
+
                     <li class="drop-down"><a href="#">Data Master</a>
                         <ul>
                             <li><a class="dropdown-item" href="{{ route('profilemadrasah.index') }}">Profile Madrasah</a></li>
@@ -52,51 +53,53 @@
                             <li><a class="dropdown-item" href="{{ route('contact.index') }}">Contact</a></li>
                         </ul>
                     </li>
-                    <li class="drop-down"><a href="">Data PPDB Online</a>
+
+                    <li class="drop-down"><a href="#">Data PPDB Online</a>
                         <ul>
                             <li><a class="dropdown-item" href="{{ route('informasipendaftaran.index') }}">Informasi Pendaftaran</a></li>
-                            <li><a href="/register" target="_blank">Data Pendaftar</a></li>
+                            <li><a class="dropdown-item" href="{{ route('ppdb') }}" target="_blank">Formulir PPDB</a></li>
+                            <li><a class="dropdown-item" href="{{ route('daftar.index') }}">Data Pendaftar</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ route('berita.index') }}">Data Berita</a></li>
-                    <li class="drop-down"><a href=""><b>{{ Auth::user()->name }}</b></a>
-                        <ul>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                    Keluar</a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
+                    <li><a href="{{ route('berita.index') }}">Data Berita</a></li>
+
+                    <!-- User Menu -->
+                    @if(Auth::check())
+                        <li class="drop-down"><a href="#"><b>{{ Auth::user()->name }}</b></a>
+                            <ul>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                        Keluar
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                    @endif
                 </ul>
             </nav><!-- .nav-menu -->
         </div>
     </header><!-- End Header -->
 
-    <main id="main">
-
+    <main id="main" class="mt-5 pt-5">
         @yield('content')
-
     </main><!-- End #main -->
-
-
 
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="container footer-bottom clearfix">
             <div class="copyright">
-                {{$madrasah->nama}} | <strong><span>2020</span></strong>. All Rights Reserved
+                {{ $madrasah->nama ?? 'Nama Madrasah' }} | <strong><span>2025</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/enno-free-simple-bootstrap-template/ -->
                 Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
         </div>
@@ -120,12 +123,10 @@
 
     <!-- Summernote -->
     <script src="/assets/summernote/js/summernote.min.js"></script>
-    <!-- Summernote init -->
     <script src="/js/plugins-init/summernote-init.js"></script>
 
     <!-- Sweet Alert  -->
     @include('sweetalert::alert')
 
 </body>
-
 </html>
